@@ -1,12 +1,17 @@
-const basicAuth = require("basic-auth");
-
 function authMiddleware(req, res, next) {
-  const credentials = basicAuth(req);
-  if (!credentials || credentials.name !== process.env.AUTH_USER || credentials.pass !== process.env.AUTH_PASS) {
-    res.status(401).send("Access Denied");
-    return;
+  const accessToken = req.header("Access-Token");
+
+  // Verifique se o token está presente
+  if (!accessToken) {
+    return res.status(401).json({ error: "Access Token is required" });
   }
-  next();
+
+  // Compare com o valor configurado no .env
+  if (accessToken !== process.env.AUTH_TOKEN) {
+    return res.status(403).json({ error: "Invalid Access Token" });
+  }
+
+  next(); // Continue para a próxima rota
 }
 
 module.exports = { authMiddleware };
