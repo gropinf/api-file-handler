@@ -39,6 +39,9 @@ app.post("/upload", authMiddleware, (req, res) => {
     const fileExtension = path.extname(fileName); // Extrai a extensão do arquivo
     const uniqueName = `${uuidv4()}${fileExtension}`; // Nome único para evitar conflitos
     const filePath = path.join(uploadFolder, uniqueName);
+    //console.log(`fileExtension = ${fileExtension}`);
+    //console.log(`uniqueName = ${uniqueName}`);
+    //console.log(`filePath = ${filePath}`);
 
     // Escreve o arquivo decodificado na pasta
     const fileData = base64.split(";base64,").pop(); // Remove o prefixo Base64
