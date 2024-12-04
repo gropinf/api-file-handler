@@ -69,8 +69,8 @@ app.post("/extract-text", authMiddleware, async (req, res) => {
 
   }
 
-  //const buffer = Buffer.from(base64, "base64");
-  //const filePath = `uploads/${Date.now()}`;
+  const buffer = Buffer.from(base64, "base64");
+  const filePath = `uploads/${Date.now()}`;
   fs.writeFileSync(filePath, buffer);
 
   try {
